@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var uploadHendler = document.querySelector('.upload');
+  var uploadButton = document.querySelector('.upload');
   var computedStyle = getComputedStyle(window.setup.setupWindow);
   var setupWindowDefaultPosition = {
     x: computedStyle.left,
@@ -13,7 +13,13 @@
     window.setup.setupWindow.style.top = window.dialog.setupWindowDefaultPosition.y;
   };
 
-  uploadHendler.addEventListener('mousedown', function (evt) {
+
+  var onClickPreventDefault = function (clickEvt) {
+    clickEvt.preventDefault();
+    uploadButton.removeEventListener('click', onClickPreventDefault);
+  };
+
+  var setupWindowHandler = function (evt) {
     evt.preventDefault();
 
     var isDragged = false;
@@ -44,11 +50,7 @@
       downEvt.preventDefault();
 
       if (isDragged) {
-        var onClickPreventDefault = function (clickEvt) {
-          clickEvt.preventDefault();
-          uploadHendler.removeEventListener('click', onClickPreventDefault);
-        };
-        uploadHendler.addEventListener('click', onClickPreventDefault);
+        uploadButton.addEventListener('click', onClickPreventDefault);
       }
       document.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
@@ -56,7 +58,9 @@
 
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
-  });
+  };
+
+  uploadButton.addEventListener('mousedown', setupWindowHandler);
 
   window.dialog = {
     setupWindowDefaultPosition: setupWindowDefaultPosition,
