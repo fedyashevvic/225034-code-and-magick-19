@@ -28,7 +28,6 @@
     });
 
     xhr.timeout = TIMEOUT_LIMIT;
-    
     xhr.open('POST', POST_URL);
     xhr.send(data);
   };
@@ -81,8 +80,8 @@
   var loadErrorHandler = function (data) {
     var errorMsg = document.createElement('p');
     errorMsg.textContent = data;
-    errorMsg.style.background = "#ff0000";
-    errorMsg.style.color = "#fff";
+    errorMsg.style.background = '#ff0000';
+    errorMsg.style.color = '#fff';
     document.querySelector('.setup-similar-list').appendChild(errorMsg);
     document.querySelector('.setup-similar').classList.remove('hidden');
   };
