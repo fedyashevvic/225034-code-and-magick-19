@@ -9,7 +9,7 @@
 
 
   var save = function (data, onLoad, onError) {
-    var xhr = new XMLHttpRequest;
+    var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
@@ -50,7 +50,7 @@
   });
 
   var load = function (onLoad, onError) {
-    var xhr = new XMLHttpRequest;
+    var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
