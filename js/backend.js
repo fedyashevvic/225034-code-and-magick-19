@@ -5,8 +5,6 @@
   var WIZARDS_URL = 'https://js.dump.academy/code-and-magick/data';
   var POST_URL = 'https://js.dump.academy/code-and-magick';
   var TIMEOUT_LIMIT = 10000;
-  var wizardForm = document.querySelector('.setup-wizard-form');
-
 
   var save = function (data, onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -31,23 +29,6 @@
     xhr.open('POST', POST_URL);
     xhr.send(data);
   };
-
-  var saveSuccessHandler = function () {
-    window.setup.setupWindow.classList.add('hidden');
-  };
-  var saveErrorHandler = function (data) {
-    var errorMsg = document.createElement('p');
-    errorMsg.textContent = data;
-    errorMsg.style.background = '#ff0000';
-    errorMsg.style.color = '#fff';
-    errorMsg.style.textAlign = 'center';
-    document.querySelector('button.setup-submit').after(errorMsg);
-  };
-
-  wizardForm.addEventListener('submit', function (evt) {
-    save(new FormData(wizardForm), saveSuccessHandler, saveErrorHandler);
-    evt.preventDefault();
-  });
 
   var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
@@ -74,22 +55,8 @@
     xhr.send();
   };
 
-  var loadSuccessHandler = function (data) {
-    window.setup.renderWizardItem(data);
-  };
-  var loadErrorHandler = function (data) {
-    var errorMsg = document.createElement('p');
-    errorMsg.textContent = data;
-    errorMsg.style.background = '#ff0000';
-    errorMsg.style.color = '#fff';
-    document.querySelector('.setup-similar-list').appendChild(errorMsg);
-    document.querySelector('.setup-similar').classList.remove('hidden');
-  };
-
-  load(loadSuccessHandler, loadErrorHandler);
-
-
   window.backend = {
+    save: save,
     load: load,
   };
 
