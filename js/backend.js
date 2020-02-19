@@ -14,7 +14,7 @@
       if (xhr.status === SUCCESS_CODE) {
         onLoad(xhr.response);
       } else {
-        onError('Сервер недоступен, попробуйте позднее!');
+        onError('Сервер недоступен, попробуйте позже!');
       }
     });
 
